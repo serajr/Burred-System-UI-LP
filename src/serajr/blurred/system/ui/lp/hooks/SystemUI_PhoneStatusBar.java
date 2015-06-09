@@ -35,83 +35,85 @@ public class SystemUI_PhoneStatusBar {
 					// receiver
 					BroadcastReceiver receiver = new BroadcastReceiver() {
             			
-                        @Override
-                        public void onReceive(Context context, Intent intent) {
+			                        @Override
+			                        public void onReceive(Context context, Intent intent) {
                         	
-                        	// obtém os campos
-        					boolean mExpandedVisible = XposedHelpers.getBooleanField(thiz, "mExpandedVisible");
-        					
-                        	String action = intent.getAction();
+	                        			// obtÃ©m os campos
+	        					boolean mExpandedVisible = XposedHelpers.getBooleanField(thiz, "mExpandedVisible");
+	        					
+	                        			String action = intent.getAction();
+	                        	
+	    						// alterou a rotaÃ§Ã£o ?
+	                        			if (action.equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
+	                        		
+			                        		// recents
+			                        		SystemUI_RecentsActivity.onConfigurationChanged();
+		                        		
+		                        			// ----------------------------------------------------------------------
+		        					// se na rotaÃ§Ã£o do celular o mod estiver habilitado e o painel expandido
+		        					// estiver aberto, fecha o painel expandido forÃ§ando o usuÃ¡rio a expandir
+		        					// o painel novamente para obtÃ©r a imagem desfocada com a rotaÃ§Ã£o atual!!
+		        					// ----------------------------------------------------------------------
+		                        		
+		        					// habilitado ?
+		        					if (mExpandedVisible &&
+		        						SystemUI_NotificationPanelView.mBlurredStatusBarExpandedEnabled) {
+		        					
+		        						// fecha o painel
+		        						XposedHelpers.callMethod(thiz, "makeExpandedInvisible");
+		        					
+		        					}
+		                        		}
                         	
-    						// alterou a rotação ?
-                        	if (action.equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
-                        		
-                        		// recents
-                        		SystemUI_RecentsActivity.onConfigurationChanged();
-                        		
-                        		// ----------------------------------------------------------------------
-        						// se na rotação do celular o mod estiver habilitado e o painel expandido
-        						// estiver aberto, fecha o painel expandido forçando o usuário a expandir
-        						// o painel novamente para obtér a imagem desfocada com a rotação atual!!
-        						// ----------------------------------------------------------------------
-                        		
-        						// habilitado ?
-        						if (mExpandedVisible &&
-        							SystemUI_NotificationPanelView.mBlurredStatusBarExpandedEnabled) {
-        					
-        							// fecha o painel
-        							XposedHelpers.callMethod(thiz, "makeExpandedInvisible");
-        						
-        						}
-                        	}
+	                        			// atualiza
+	                        			if (action.equals(BlurSettingsFragment.BLURRED_SYSTEM_UI_UPDATE_INTENT)) {
+	                        		
+	                        				mHandler.postDelayed(new Runnable() {
+	                                	
+				                                    	@Override
+				                                    	public void run() {
+				                                    	
+					                                    	// recarregam as preferÃªncias
+					                                	Xposed.mXSharedPreferences.reload();
+					                                		
+					                                	// atualizam as preferÃªncias
+					                                	updatePreferences();
+				                                		
+				                                    	}
+				                                    	
+				                                }, 100);
+	                        			}
                         	
-                        	// atualiza
-                        	if (action.equals(BlurSettingsFragment.BLURRED_SYSTEM_UI_UPDATE_INTENT)) {
-                        		
-                        		mHandler.postDelayed(new Runnable() {
-                                	
-                                    @Override
-                                    public void run() {
-                                    	
-                                    	// recarregam as preferências
-                                		Xposed.mXSharedPreferences.reload();
-                                		
-                                		// atualizam as preferências
-                                		updatePreferences();
-                                		
-                                    }
-                                }, 100);
-                        	}
-                        	
-                        	// mata
-                        	if (action.equals(BlurSettingsActivity.BLURRED_SYSTEM_UI_KILL_SYSTEM_UI_INTENT)) {
-				
-                        		mHandler.postDelayed(new Runnable() {
-                                	
-                                    @Override
-                                    public void run() {
-                                    	
-                                    	// mata
-                                    	Process.sendSignal(Process.myPid(), Process.SIGNAL_KILL);
-                                    	
-                                    }
-                             	}, 100);
-                        	}
-                        }
-                    };
+	                        			// mata
+	                        			if (action.equals(BlurSettingsActivity.BLURRED_SYSTEM_UI_KILL_SYSTEM_UI_INTENT)) {
+					
+	                        				mHandler.postDelayed(new Runnable() {
+	                                	
+				                                    	@Override
+				                                    	public void run() {
+				                                    	
+				                                    		// mata
+				                                    		Process.sendSignal(Process.myPid(), Process.SIGNAL_KILL);
+				                                    	
+				                                    	}
+				                                    	
+				                             	}, 100);
+	                        			}
+	                        		}
+	                    		};
                     	
-                    // registra o receiver
-                    IntentFilter intent = new IntentFilter();
-                    intent.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
-                    intent.addAction(BlurSettingsFragment.BLURRED_SYSTEM_UI_UPDATE_INTENT);
-                    intent.addAction(BlurSettingsActivity.BLURRED_SYSTEM_UI_KILL_SYSTEM_UI_INTENT);
-                    thiz.mContext.registerReceiver(receiver, intent);
+	                    		// registra o receiver
+	                    		IntentFilter intent = new IntentFilter();
+			                intent.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+			                intent.addAction(BlurSettingsFragment.BLURRED_SYSTEM_UI_UPDATE_INTENT);
+			                intent.addAction(BlurSettingsActivity.BLURRED_SYSTEM_UI_KILL_SYSTEM_UI_INTENT);
+			                thiz.mContext.registerReceiver(receiver, intent);
             		
-                    // inicia
-                    SystemUI_RecentsActivity.init(thiz.mContext);
+                    			// inicia
+                    			SystemUI_RecentsActivity.init(thiz.mContext);
                     
-                    // atualizam as preferências
-            		updatePreferences();
+                    			// atualizam as preferÃªncias
+            				updatePreferences();
             		
 				}
 			});
