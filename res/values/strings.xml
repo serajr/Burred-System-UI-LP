@@ -1,0 +1,37 @@
+<resources>
+
+    <string name="app_name">Blurred System UI (LP)</string>
+    <string name="app_description">Created by: SERAJR (2015)</string>
+   
+    <string name="about_menu_title">About&#8230;</string>
+	<string name="exit_menu_title">Exit !!</string>
+	<string name="restart_menu_title">Restart System UI</string>
+	<string name="restart_menu_message">"System UI will be restarted now!
+
+Warning:
+Possible theme and/or wallpaper loss. Restart process can take a while (just wait)!!"</string>
+	
+	<string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color to apply</string>
+    
+    <string name="panels_category">Panels</string>
+    	<string name="panels_status_bar_expanded_title">Status Bar Expanded</string>
+    	<string name="panels_recent_apps_title">Recent Applications</string>
+    
+    <string name="blur_settings_category">Gaussian Blur Settings</string>
+    	<string name="blur_scale_title">Bitmap Scale</string>
+    	<string name="blur_radius_title">Blur Radius</string>
+    	<string name="blur_light_color_title">Color Filter - Light Image</string>
+    	<string name="blur_mixed_color_title">Color Filter - Mixed Image</string>
+    	<string name="blur_dark_color_title">Color Filter - Dark Image</string>
+
+    <string name="translucent_background_category">Translucent Background</string>
+    	<string name="translucent_percentage_title">Transucency Percentage</string>
+    	<string name="translucent_header_title">Header</string>
+    	<string name="translucent_header_summary">Topmost status bar expanded contents</string>
+    	<string name="translucent_quick_settings_title">Quick Settings</string>
+    	<string name="translucent_quick_settings_summary">Quick settings tiles and/or buttons</string>
+    	<string name="translucent_notifications_title">Notifications</string>
+    	<string name="translucent_notifications_summary">Note: Not all notifications may be reached due custom background</string>
+    	
+</resources>

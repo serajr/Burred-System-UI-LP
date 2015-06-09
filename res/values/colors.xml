@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- The Lime 500 color from here:
+    http://www.google.de/design/spec/style/color.html#color-ui-color-palette
+    We should use a 500 color for the primary color.
+    For instance, for our toolbar background. -->
+    <color name="color_primary">#607D8B</color>
+
+    <!-- The Lime 700 color from here:
+    http://www.google.de/design/spec/style/color.html#color-ui-color-palette
+    We should use the 700 color for the darker areas such as the status bar.-->
+    <color name="color_primary_dark">#455A64</color>
+
+    <!-- The Lime 100 color from here:
+    http://www.google.de/design/spec/style/color.html#color-ui-color-palette
+    We should use the 100 color for the TODO: what?.
+    There is no corresponding colorPrimaryLight in Theme.AppCompat.-->
+    <color name="color_primary_light">#CFD8DC</color>
+
+    <!-- The Blue 750 color from here:
+    http://www.google.de/design/spec/style/color.html#color-ui-color-palette
+    We should use a second 500 color for the accent.-->
+    <color name="color_accent">#607D8B</color>
+    
+    <color name="text_color_primary">@android:color/black</color>
+    <color name="color_window_background">@android:color/white</color>
+    
+</resources>

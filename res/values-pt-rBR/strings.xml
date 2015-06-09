@@ -1,0 +1,36 @@
+<resources>
+	    
+    <string name="app_description">Criado por: SERAJR (2015)</string>
+	
+    <string name="about_menu_title">Sobre&#8230;</string>
+	<string name="exit_menu_title">Sair !!</string>
+    <string name="restart_menu_title">Reiniciar System UI</string>
+	<string name="restart_menu_message">"System UI será reiniciado agora!
+
+Aviso:
+Possível perda do tema e/ou papel de parede. Processo de reinicialização pode demorar um pouco (somente aguarde)!!"</string>
+	
+	<string name="dialog_color_picker">Selecionador de Cor</string>
+    <string name="press_color_to_apply">Toque na cor para aplicar</string>
+    
+    <string name="panels_category">Painéis</string>
+    	<string name="panels_status_bar_expanded_title">Status Bar Expandida</string>
+    	<string name="panels_recent_apps_title">Aplicações Recentes</string>
+    
+    <string name="blur_settings_category">Config. Desfoque Gaussiano</string>
+    	<string name="blur_scale_title">Escala do Bitmap</string>
+    	<string name="blur_radius_title">Raio de Desfoque</string>
+    	<string name="blur_light_color_title">Filtro de Cor - Imagem Clara</string>
+    	<string name="blur_mixed_color_title">Filtro de Cor - Imagem Mista</string>
+    	<string name="blur_dark_color_title">Filtro de Cor - Imagem Escura</string>
+	
+    <string name="translucent_background_category">Fundo Transparente</string>
+    	<string name="translucent_percentage_title">Percentual de Transparência</string>
+    	<string name="translucent_header_title">Cabeçalho</string>
+    	<string name="translucent_header_summary">Contéudo mais acima da barra de status expandida</string>
+    	<string name="translucent_quick_settings_title">Configurações Rápidas</string>
+    	<string name="translucent_quick_settings_summary">Botões de configurações rápidas</string>
+    	<string name="translucent_notifications_title">Notificações</string>
+    	<string name="translucent_notifications_summary">Nota: Nem todas as notificações serão modificadas devido a fundos customizados!</string>
+    	
+</resources>

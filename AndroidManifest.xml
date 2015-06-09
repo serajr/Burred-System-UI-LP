@@ -1,0 +1,45 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="serajr.blurred.system.ui.lp"
+    android:versionCode="101"
+    android:versionName="1.0.1" >
+	
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="22" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <!-- dados do exposed framework -->
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        
+        <meta-data
+            android:name="xposedminversion"
+            android:value="2.0*"/>
+        
+        <meta-data
+            android:name="xposeddescription"
+            android:value="@string/app_description"/>
+        
+        <!-- tela do programa -->
+        <activity
+            android:name=".activities.BlurSettingsActivity"
+            android:label="@string/app_name"
+            android:icon="@drawable/ic_launcher"
+            android:configChanges="orientation|keyboardHidden|screenSize" >
+            
+            <intent-filter>
+        		<action android:name="android.intent.action.MAIN" />
+        		<category android:name="android.intent.category.LAUNCHER" />
+    		</intent-filter>
+    		
+        </activity>
+        
+    </application>
+
+</manifest>
