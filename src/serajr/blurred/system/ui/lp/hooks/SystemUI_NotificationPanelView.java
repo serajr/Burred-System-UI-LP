@@ -47,7 +47,7 @@ public class SystemUI_NotificationPanelView {
 		@Override
 		public void onAnimationStart(Animation anim) {
 			
-			// visível
+			// visÃ­vel
 			mBlurredView.setVisibility(View.VISIBLE);
 			
 		}
@@ -77,7 +77,7 @@ public class SystemUI_NotificationPanelView {
 					// inicia o BlurUtils
 					mBlurUtils = new BlurUtils(mNotificationPanelView.getContext());
 					
-					// animação
+					// animaÃ§Ã£o
 					mAlphaAnimation = new AlphaAnimation(0.0f, 1.0f);
 					mAlphaAnimation.setDuration(300);
 					mAlphaAnimation.setAnimationListener(mAnimationListener);
@@ -85,20 +85,20 @@ public class SystemUI_NotificationPanelView {
 					// cria o mBlurredView
 					mBlurredView = new FrameLayout(mNotificationPanelView.getContext());
 					
-			    	// insere o mBlurredView no mNotificationPanelView na posição 0 (ordem importa)
-			    	mNotificationPanelView.addView(mBlurredView, 0, new FrameLayout.LayoutParams(
-			    			FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-			    	mNotificationPanelView.requestLayout();
-			    	
-			    	// seta o tag de: pronto para receber o blur
-			    	mBlurredView.setTag("ready_to_blur");
-			    	
-			    	// invisível
-			    	mBlurredView.setVisibility(View.INVISIBLE);
-					
-			    	// transparente ?
-			    	handleQuickSettingsBackround();
-			    	
+				    	// insere o mBlurredView no mNotificationPanelView na posiÃ§Ã£o 0 (ordem importa)
+				    	mNotificationPanelView.addView(mBlurredView, 0, new FrameLayout.LayoutParams(
+				    			FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+				    	mNotificationPanelView.requestLayout();
+				    	
+				    	// seta o tag de: pronto para receber o blur
+				    	mBlurredView.setTag("ready_to_blur");
+				    	
+				    	// invisÃ­vel
+				    	mBlurredView.setVisibility(View.INVISIBLE);
+						
+				    	// transparente ?
+				    	handleQuickSettingsBackround();
+				    	
 				}
 			});
 			
@@ -146,7 +146,7 @@ public class SystemUI_NotificationPanelView {
 		if (mNotificationPanelView == null)
 			return;
 		
-		// obtém os campos
+		// obtÃ©m os campos
 		boolean mKeyguardShowing = XposedHelpers.getBooleanField(mNotificationPanelView, "mKeyguardShowing");
 		
 		// continua ?
@@ -172,7 +172,7 @@ public class SystemUI_NotificationPanelView {
 		if (!mBlurredStatusBarExpandedEnabled)
 			return;
 		
-		// não continua se o blur ja foi aplicado !!!
+		// nÃ£o continua se o blur ja foi aplicado !!!
 		if (mBlurredView.getTag().toString().equals("blur_applied"))
 			return;
 		
@@ -180,7 +180,7 @@ public class SystemUI_NotificationPanelView {
 		if (mNotificationPanelView == null)
 			return;
 		
-		// obtém os campos
+		// obtÃ©m os campos
 		boolean mKeyguardShowing = XposedHelpers.getBooleanField(mNotificationPanelView, "mKeyguardShowing");
 		
 		// lockscreen ?
@@ -236,7 +236,7 @@ public class SystemUI_NotificationPanelView {
 			@Override
 			public void dominantColor(int color) {
 				
-				// obtém a luminosidade da cor dominante
+				// obtÃ©m a luminosidade da cor dominante
 				double lightness = DisplayUtils.getColorLightness(color);
 				
 				if (lightness >= 0.0 && color <= 1.0) {
@@ -310,8 +310,8 @@ public class SystemUI_NotificationPanelView {
 		// seta o tag de: pronto para receber o blur
 		mBlurredView.setTag("ready_to_blur");
 		
-		// invisível
-    	mBlurredView.setVisibility(View.INVISIBLE);
+		// invisÃ­vel
+    		mBlurredView.setVisibility(View.INVISIBLE);
 		
 	}
 	
@@ -346,10 +346,10 @@ public class SystemUI_NotificationPanelView {
 			
 			Context context = mNotificationPanelView.getContext(); 
 			
-			// obtém o tamamho real da tela
+			// obtÃ©m o tamamho real da tela
 			mScreenDimens = DisplayUtils.getRealScreenDimensions(context);
 			
-			// obtém a screenshot da tela com escala reduzida
+			// obtÃ©m a screenshot da tela com escala reduzida
 			mScreenBitmap = DisplayUtils.takeSurfaceScreenshot(context, mBlurScale);
 			
 		}
