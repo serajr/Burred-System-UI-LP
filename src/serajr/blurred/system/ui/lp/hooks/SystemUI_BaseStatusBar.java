@@ -21,7 +21,7 @@ public class SystemUI_BaseStatusBar {
 			XposedHelpers.findAndHookMethod(BaseStatusBar.class, "start", new XC_MethodHook() {
 				
 				@Override
-	            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+	            		protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					
 					// guarda
 					mNotificationData = (NotificationData) XposedHelpers.getObjectField(param.thisObject, "mNotificationData"); 
@@ -33,7 +33,7 @@ public class SystemUI_BaseStatusBar {
 			XposedHelpers.findAndHookMethod(BaseStatusBar.class, "toggleRecentApps", new XC_MethodHook() {
 				
 				@Override
-	            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+	            		protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					
 					// blur
 					SystemUI_RecentsActivity.startBlurTask();
@@ -54,18 +54,18 @@ public class SystemUI_BaseStatusBar {
 		if (mNotificationData == null)
 			return;
 		
-		// passam por todas a notificações
+		// passam por todas a notificaÃ§Ãµes
 		for (Entry entry : mNotificationData.getActiveNotifications()) {
 			
 			// -------------------------------------------------------------------------
 			// ExpandableNotificationRow (entry.row) extends ActivatableNotificationView
 			// -------------------------------------------------------------------------
 			
-			// obtém os campos
+			// obtÃ©m os campos
 			NotificationBackgroundView mBackgroundNormal = (NotificationBackgroundView) XposedHelpers.getObjectField(entry.row, "mBackgroundNormal");
 			NotificationBackgroundView mBackgroundDimmed = (NotificationBackgroundView) XposedHelpers.getObjectField(entry.row, "mBackgroundDimmed");
 			
-			// invalida (força o draw)
+			// invalida (forÃ§a o draw)
 			mBackgroundNormal.postInvalidate();
 			mBackgroundDimmed.postInvalidate();
 			
