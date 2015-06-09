@@ -65,7 +65,7 @@ public class SystemUI_BaseStatusBar {
 			NotificationBackgroundView mBackgroundNormal = (NotificationBackgroundView) XposedHelpers.getObjectField(entry.row, "mBackgroundNormal");
 			NotificationBackgroundView mBackgroundDimmed = (NotificationBackgroundView) XposedHelpers.getObjectField(entry.row, "mBackgroundDimmed");
 			
-			// invalida (força o draw)
+			// invalida (força o draw no ui)
 			mBackgroundNormal.postInvalidate();
 			mBackgroundDimmed.postInvalidate();
 			
