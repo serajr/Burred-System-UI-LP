@@ -30,7 +30,7 @@ public class SystemUI_NotificationBackgroundView {
 					if (SystemUI_NotificationPanelView.mNotificationPanelView == null)
 						return;
 					
-					// obtém os campos
+					// obtÃ©m os campos
 					boolean mKeyguardShowing = XposedHelpers.getBooleanField(SystemUI_NotificationPanelView.mNotificationPanelView, "mKeyguardShowing");
 					
 					// lockscreen ?
@@ -59,7 +59,7 @@ public class SystemUI_NotificationBackgroundView {
 							((Drawable) param.args[1]).setAlpha(255);
 						
 					}
-		        }
+		        	}
 			});
 			
 		} catch (Exception e) {
