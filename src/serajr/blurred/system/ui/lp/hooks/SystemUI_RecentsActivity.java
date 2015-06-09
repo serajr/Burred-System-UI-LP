@@ -51,13 +51,13 @@ public class SystemUI_RecentsActivity {
 					// guarda
 					mRecentsActivity = (RecentsActivity) param.thisObject;
 					
-					// obtém os campos
+					// obtÃ©m os campos
 					RecentsView mRecentsView = (RecentsView) XposedHelpers.getObjectField(param.thisObject, "mRecentsView");
 					
 					// guarda o layout parente do mRecentsView (root)
 					mRecentsActivityRootView = (FrameLayout) mRecentsView.getParent();
 					
-					// obtém o último blurred bitmap
+					// obtÃ©m o Ãºltimo blurred bitmap
 					Bitmap lastBlurredBitmap = BlurTask.getLastBlurredBitmap();
 					
 					// seta o background ?
@@ -106,7 +106,7 @@ public class SystemUI_RecentsActivity {
 	public static void onConfigurationChanged() {
 		
 		// -----------------
-		// alterou a rotação
+		// alterou a rotaÃ§Ã£o
 		// -----------------
 		
 		// recicla
@@ -127,7 +127,7 @@ public class SystemUI_RecentsActivity {
 		// continua ?
 		if (mRecentsActivity != null) {
 			
-			// obtém os campos
+			// obtÃ©m os campos
 			boolean mVisible = XposedHelpers.getBooleanField(mRecentsActivity, "mVisible");
 			
 			if (mVisible)
@@ -170,7 +170,7 @@ public class SystemUI_RecentsActivity {
 			@Override
 			public void dominantColor(int color) {
 				
-				// obtém a luminosidade da cor dominante
+				// obtÃ©m a luminosidade da cor dominante
 				double lightness = DisplayUtils.getColorLightness(color);
 				
 				if (lightness >= 0.0 && color <= 1.0) {
@@ -226,16 +226,16 @@ public class SystemUI_RecentsActivity {
 		if (mRecentsActivityRootView.getBackground() != null) {
 			
 			// recicla
-		    Bitmap bitmap = ((BitmapDrawable) mRecentsActivityRootView.getBackground()).getBitmap();
-		    if (bitmap != null) {
+		    	Bitmap bitmap = ((BitmapDrawable) mRecentsActivityRootView.getBackground()).getBitmap();
+		    	if (bitmap != null) {
 		    	
-		    	bitmap.recycle();
-		    	bitmap = null;
+		    		bitmap.recycle();
+		    		bitmap = null;
 		    	
-		    }
+		    	}
 			
 			// limpa
-		    mRecentsActivityRootView.setBackground(null);	
+		    	mRecentsActivityRootView.setBackground(null);	
 			
 		}
 	}
@@ -255,7 +255,7 @@ public class SystemUI_RecentsActivity {
 		
 		public static void setBlurTaskCallback(BlurTaskCallback callBack) {
 			
-		    mCallback = callBack;
+		    	mCallback = callBack;
 		    
 		}
 		
@@ -274,10 +274,10 @@ public class SystemUI_RecentsActivity {
 		@Override
 		protected void onPreExecute() {
 			
-			// obtém o tamamho real da tela
+			// obtÃ©m o tamamho real da tela
 			mScreenDimens = DisplayUtils.getRealScreenDimensions(mContext);
 			
-			// obtém a screenshot da tela com escala reduzida
+			// obtÃ©m a screenshot da tela com escala reduzida
 			mScreenBitmap = DisplayUtils.takeSurfaceScreenshot(mContext, mBlurScale);
 			
 		}
