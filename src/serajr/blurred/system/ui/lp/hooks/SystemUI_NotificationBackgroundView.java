@@ -37,7 +37,7 @@ public class SystemUI_NotificationBackgroundView {
 					if (mKeyguardShowing)
 						return;
 					
-					// heads up ?
+					// heads-up ?
 					if (SystemUI_NotificationPanelView.mNotificationPanelView.isFullyCollapsed()) {
 						
 						if (((Drawable) param.args[1]).getAlpha() != 255)
