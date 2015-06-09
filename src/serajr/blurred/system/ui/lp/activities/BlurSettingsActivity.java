@@ -38,7 +38,7 @@ public class BlurSettingsActivity extends ActionBarActivity {
       	
       	try {
       		
-      		mAppInfo = getString(R.string.app_name) + " - v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+      		mAppInfo = getString(R.string.app_name) + "  -  v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 			
 		} catch (NameNotFoundException e) {
 			
