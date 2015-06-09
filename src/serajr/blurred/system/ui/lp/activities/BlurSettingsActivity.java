@@ -22,7 +22,7 @@ public class BlurSettingsActivity extends ActionBarActivity {
 	
 	@Override
     	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	    super.onCreate(savedInstanceState);
 		
 	        // seta o layout
 	        setContentView(R.layout.main_layout);        
