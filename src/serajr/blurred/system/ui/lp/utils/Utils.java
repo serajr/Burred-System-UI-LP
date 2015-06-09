@@ -9,31 +9,31 @@ public class Utils {
 		
 	public static ArrayList<View> getAllViews(View view) {
 
-	    if (!(view instanceof ViewGroup)) {
+	    	if (!(view instanceof ViewGroup)) {
 	    	
-	        ArrayList<View> viewArrayList = new ArrayList<View>();
-	        viewArrayList.add(view);
+	        	ArrayList<View> viewArrayList = new ArrayList<View>();
+	        	viewArrayList.add(view);
 	        
-	        return viewArrayList;
+	        	return viewArrayList;
 	        
-	    }
+	    	}
 
-	    ArrayList<View> result = new ArrayList<View>();
+	    	ArrayList<View> result = new ArrayList<View>();
 
-	    ViewGroup viewGroup = (ViewGroup) view;
-	    for (int i = 0; i < viewGroup.getChildCount(); i++) {
+	    	ViewGroup viewGroup = (ViewGroup) view;
+	    	for (int i = 0; i < viewGroup.getChildCount(); i++) {
 
-	        View child = viewGroup.getChildAt(i);
+	        	View child = viewGroup.getChildAt(i);
 
-	        ArrayList<View> viewArrayList = new ArrayList<View>();
-	        viewArrayList.add(view);
-	        viewArrayList.addAll(getAllViews(child));
+	        	ArrayList<View> viewArrayList = new ArrayList<View>();
+	        	viewArrayList.add(view);
+	        	viewArrayList.addAll(getAllViews(child));
 
-	        result.addAll(viewArrayList);
+	        	result.addAll(viewArrayList);
 	        
-	    }
+	    	}
 	    
-	    return result;
+	    	return result;
 	    
 	}
 }
