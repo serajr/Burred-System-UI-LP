@@ -21,33 +21,33 @@ public class BlurSettingsActivity extends ActionBarActivity {
 	private Toolbar mToolbar;
 	
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
+    	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-        // seta o layout
-        setContentView(R.layout.main_layout);        
-        
-        // toolbar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        setSupportActionBar(mToolbar);
-        
-        // action bar
-      	ActionBar actionBar = getSupportActionBar();
-      	actionBar.setIcon(R.drawable.ic_launcher);
-      	actionBar.setTitle("  " + getResources().getString(R.string.app_name));
-      	
-      	try {
-      		
-      		mAppInfo = getString(R.string.app_name) + "  -  v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-			
+	        // seta o layout
+	        setContentView(R.layout.main_layout);        
+	        
+	        // toolbar
+	        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+	        setSupportActionBar(mToolbar);
+	        
+	        // action bar
+	      	ActionBar actionBar = getSupportActionBar();
+	      	actionBar.setIcon(R.drawable.ic_launcher);
+	      	actionBar.setTitle("  " + getResources().getString(R.string.app_name));
+	      	
+	      	try {
+	      		
+	      		mAppInfo = getString(R.string.app_name) + "  -  v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+				
 		} catch (NameNotFoundException e) {
 			
 			e.printStackTrace();
 			
 		}
-      	
-      	// mostra o fragment como sendo o layout
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new BlurSettingsFragment()).commit();
+	      	
+	      	// mostra o fragment como sendo o layout
+	        getFragmentManager().beginTransaction().replace(android.R.id.content, new BlurSettingsFragment()).commit();
       	
 	}
 	
@@ -92,25 +92,25 @@ public class BlurSettingsActivity extends ActionBarActivity {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.restart_menu_title);
-        builder.setMessage(R.string.restart_menu_message);
-        builder.setNegativeButton(android.R.string.cancel, null);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+        	builder.setMessage(R.string.restart_menu_message);
+        	builder.setNegativeButton(android.R.string.cancel, null);
+        	builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
         	
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            	
-            	// envia o intent
+	            	@Override
+	            	public void onClick(DialogInterface dialog, int which) {
+	            	
+		            	// envia o intent
 				Intent intent = new Intent(BLURRED_SYSTEM_UI_KILL_SYSTEM_UI_INTENT);
 				BlurSettingsActivity.this.sendBroadcast(intent);
-            	
+		            	
 				// termina a app
 				finish();
-                
-    		}
-        });
-        
-        AlertDialog dialog = builder.create();
-        dialog.show();
+	                
+	    		}
+	        });
+	        
+	        AlertDialog dialog = builder.create();
+	        dialog.show();
 		
 	}
 	
@@ -128,21 +128,21 @@ public class BlurSettingsActivity extends ActionBarActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setIcon(R.drawable.ic_launcher);
 		builder.setTitle(mAppInfo);
-        builder.setMessage(about);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-        	
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            	
-            	// dismiss
-    			dialog.dismiss();
-            	
-    		}
-        });
-        builder.setCancelable(false);
-        
-        AlertDialog dialog = builder.create();
-        dialog.show();
+	        builder.setMessage(about);
+	        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+	        	
+	            @Override
+	            public void onClick(DialogInterface dialog, int which) {
+	            	
+	            		// dismiss
+	    			dialog.dismiss();
+	            	
+	    		}
+	        });
+	        builder.setCancelable(false);
+	        
+	        AlertDialog dialog = builder.create();
+	        dialog.show();
 		
 	}
 }
