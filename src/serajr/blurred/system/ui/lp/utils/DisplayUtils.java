@@ -23,24 +23,24 @@ public class DisplayUtils {
 	
 	public static int getDominantColorByPixelsSampling(Bitmap bitmap, int rows, int cols) {
 
-      	// ------------------------------------
-      	// por amostragem de pixels - by serajr
-      	// ------------------------------------
+	      	// ------------------------------------
+	      	// por amostragem de pixels - by serajr
+	      	// ------------------------------------
 	
 		// --------------------------------------------
-      	// ex.: 6 linhas e 6 colunas (x = inÌcio e fim) 
-      	// --------------------------------------------
+	      	// ex.: 6 linhas e 6 colunas (x = in√≠cio e fim) 
+	      	// --------------------------------------------
       	
-      	// x-----
-      	// ------
-      	// ------
-      	// ------
-      	// ------
-      	// ------
-      	// -----x
+	      	// x-----
+	      	// ------
+	      	// ------
+	      	// ------
+	      	// ------
+	      	// ------
+	      	// -----x
 		
 		// --------------------------------------------------------------------------------------
-		// mÈtodo original: getDominantColor()
+		// m√©todo original: getDominantColor()
 		// http://dxr.mozilla.org/mozilla-central/source/mobile/android/base/gfx/BitmapUtils.java
 		// --------------------------------------------------------------------------------------
 		
@@ -52,8 +52,8 @@ public class DisplayUtils {
 		float[] hsv = new float[3];
 		int[] colorBins = new int[36];
 		float[] sumHue = new float[36];
-      	float[] sumSat = new float[36];
-      	float[] sumVal = new float[36];
+      		float[] sumSat = new float[36];
+      		float[] sumVal = new float[36];
       	
 		for (int row = 0; row <= rows; row++) {
 		    
@@ -61,41 +61,41 @@ public class DisplayUtils {
  			
 				//Log.d("rows_cols", (row > 0 ? yPortion * row : 0) + " | " + (col > 0 ? xPortion * col : 0));
 				
-				// obtÈm o pixel da porÁ„o x e y
+				// obt√©m o pixel da por√ß√£o x e y
 				int pixel = bitmap.getPixel(
 						col > 0 ? (xPortion * col) - 1 : 0,
 						row > 0 ? (yPortion * row) - 1 : 0);
 				
-      			Color.colorToHSV(pixel, hsv);
-      			
-      			int bin = (int) Math.floor(hsv[0] / 10.0f);
-      			
-      			sumHue[bin] = sumHue[bin] + hsv[0];
-      			sumSat[bin] = sumSat[bin] + hsv[1];
-      			sumVal[bin] = sumVal[bin] + hsv[2];
-      			
-      			colorBins[bin]++;
-
-      			if (maxBin < 0 || colorBins[bin] > colorBins[maxBin])
-      				maxBin = bin;
-      			
-      		}
+	      			Color.colorToHSV(pixel, hsv);
+	      			
+	      			int bin = (int) Math.floor(hsv[0] / 10.0f);
+	      			
+	      			sumHue[bin] = sumHue[bin] + hsv[0];
+	      			sumSat[bin] = sumSat[bin] + hsv[1];
+	      			sumVal[bin] = sumVal[bin] + hsv[2];
+	      			
+	      			colorBins[bin]++;
+	
+	      			if (maxBin < 0 || colorBins[bin] > colorBins[maxBin])
+	      				maxBin = bin;
+	      			
+	      		}
 		}
 		
 		if (maxBin < 0)
       		return Color.argb(255, 255, 255, 255);
 
-      	hsv[0] = sumHue[maxBin] / colorBins[maxBin];
-      	hsv[1] = sumSat[maxBin] / colorBins[maxBin];
-      	hsv[2] = sumVal[maxBin] / colorBins[maxBin];
-      	
-      	return Color.HSVToColor(hsv);
+	      	hsv[0] = sumHue[maxBin] / colorBins[maxBin];
+	      	hsv[1] = sumSat[maxBin] / colorBins[maxBin];
+	      	hsv[2] = sumVal[maxBin] / colorBins[maxBin];
+	      	
+	      	return Color.HSVToColor(hsv);
 		
 	}
 	
 	public static double getColorLightness(int color) {
 		
-	    return 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
+	    	return 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
 	    
 	}
 	
@@ -120,58 +120,58 @@ public class DisplayUtils {
 		Bitmap screenBitmap = null;
 		
 		display.getRealMetrics(metrics);
-        float[] dims = { metrics.widthPixels, metrics.heightPixels };
-        float degrees = getDegreesForRotation(display.getRotation());
-        boolean requiresRotation = (degrees > 0);
-        
-        if (requiresRotation) {
+	        float[] dims = { metrics.widthPixels, metrics.heightPixels };
+	        float degrees = getDegreesForRotation(display.getRotation());
+	        boolean requiresRotation = (degrees > 0);
+	        
+	        if (requiresRotation) {
+	        	
+	            	// Get the dimensions of the device in its native orientation
+	        	displayMatrix.reset();
+	        	displayMatrix.preRotate(-degrees);
+	        	displayMatrix.mapPoints(dims);
+	            	dims[0] = Math.abs(dims[0]);
+	            	dims[1] = Math.abs(dims[1]);
+	            
+	        }
         	
-            // Get the dimensions of the device in its native orientation
-        	displayMatrix.reset();
-        	displayMatrix.preRotate(-degrees);
-        	displayMatrix.mapPoints(dims);
-            dims[0] = Math.abs(dims[0]);
-            dims[1] = Math.abs(dims[1]);
+    		screenBitmap = SurfaceControl.screenshot((int) dims[0], (int) dims[1]);
+        
+	        // poss√≠vel app que precisa de seguran√ßa rodando, ou
+	        // o context n√£o tem previl√©gios suficientes par tal 
+	        if (screenBitmap == null) {
+        	
+	        	// informa e retorna
+	        	Log.i("serajr_blurred_system_ui_lp", "Cannot take surface screenshot! Skipping blur feature!!");
+	        	return null;
+        	
+        	}
+        
+        	if (requiresRotation) {
+        	
+            		// rotaciona
+	            	Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
+	            	Canvas canvas = new Canvas(bitmap);
+	            	canvas.translate(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
+	            	canvas.rotate(360f - degrees);
+	            	canvas.translate(-dims[0] / 2, -dims[1] / 2);
+	            	canvas.drawBitmap(screenBitmap, 0, 0, null);
+	            	canvas.setBitmap(null);
+	            	screenBitmap = bitmap;
             
-        }
-        	
-    	screenBitmap = SurfaceControl.screenshot((int) dims[0], (int) dims[1]);
+        	}
         
-        // possÌvel app que precisa de seguranÁa rodando, ou
-        // o context n„o tem previlÈgios suficientes par tal 
-        if (screenBitmap == null) {
-        	
-        	// informa e retorna
-        	Log.i("serajr_blurred_system_ui", "Cannot take surface screenshot! Skipping blur feature!!");
-        	return null;
-        	
-        }
+	        // mut√°vel
+	        Bitmap mutable = screenBitmap.copy(Bitmap.Config.ARGB_8888, true);
         
-        if (requiresRotation) {
-        	
-            // Rotate the screenshot to the current orientation
-            Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels, metrics.heightPixels, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap);
-            canvas.translate(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
-            canvas.rotate(360f - degrees);
-            canvas.translate(-dims[0] / 2, -dims[1] / 2);
-            canvas.drawBitmap(screenBitmap, 0, 0, null);
-            canvas.setBitmap(null);
-            screenBitmap = bitmap;
-            
-        }
+        	// optimiza√ß√µes
+        	mutable.setHasAlpha(false);
+        	mutable.prepareToDraw();
         
-        // mut·vel
-        Bitmap mutable = screenBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        	// retorna
+        	return mutable;
         
-        // Optimizations
-        mutable.setHasAlpha(false);
-        mutable.prepareToDraw();
-        
-        // retorna
-        return mutable;
-        
-    }
+    	}
 	
 	public static Bitmap takeSurfaceScreenshot(Context context, int downScale) {
 		
@@ -183,75 +183,75 @@ public class DisplayUtils {
 		Bitmap screenBitmap = null;
 		
 		display.getRealMetrics(metrics);
-        float[] dims = { metrics.widthPixels / downScale, metrics.heightPixels / downScale };
-        float degrees = getDegreesForRotation(display.getRotation());
-        boolean requiresRotation = (degrees > 0);
-        
-        if (requiresRotation) {
+	        float[] dims = { metrics.widthPixels / downScale, metrics.heightPixels / downScale };
+	        float degrees = getDegreesForRotation(display.getRotation());
+	        boolean requiresRotation = (degrees > 0);
+	        
+	        if (requiresRotation) {
+	        	
+	            	// Get the dimensions of the device in its native orientation
+	        	displayMatrix.reset();
+	        	displayMatrix.preRotate(-degrees);
+	        	displayMatrix.mapPoints(dims);
+	            	dims[0] = Math.abs(dims[0]);
+	            	dims[1] = Math.abs(dims[1]);
+	            
+	        }
         	
-            // Get the dimensions of the device in its native orientation
-        	displayMatrix.reset();
-        	displayMatrix.preRotate(-degrees);
-        	displayMatrix.mapPoints(dims);
-            dims[0] = Math.abs(dims[0]);
-            dims[1] = Math.abs(dims[1]);
+        	screenBitmap = SurfaceControl.screenshot((int) dims[0], (int) dims[1]);
+        
+	        // poss√≠vel app que precisa de seguran√ßa rodando, ou
+	        // o context n√£o tem previl√©gios suficientes par tal 
+	        if (screenBitmap == null) {
+	        	
+	        	// informa e retorna
+	        	Log.i("serajr_blurred_system_ui_lp", "Cannot take surface screenshot! Skipping blur feature!!");
+	        	return null;
+	        	
+	        }
+        
+        	if (requiresRotation) {
+        	
+	            	// rotaciona
+	            	Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels / downScale, metrics.heightPixels / downScale, Bitmap.Config.ARGB_8888);
+	            	Canvas canvas = new Canvas(bitmap);
+	            	canvas.translate(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
+	            	canvas.rotate(360f - degrees);
+	            	canvas.translate(-dims[0] / 2, -dims[1] / 2);
+	            	canvas.drawBitmap(screenBitmap, 0, 0, null);
+	            	canvas.setBitmap(null);
+	            	screenBitmap = bitmap;
             
-        }
-        	
-        screenBitmap = SurfaceControl.screenshot((int) dims[0], (int) dims[1]);
+        	}
         
-        // possÌvel app que precisa de seguranÁa rodando, ou
-        // o context n„o tem previlÈgios suficientes par tal 
-        if (screenBitmap == null) {
-        	
-        	// informa e retorna
-        	Log.i("serajr_blurred_system_ui_lp", "Cannot take surface screenshot! Skipping blur feature!!");
-        	return null;
-        	
-        }
+        	// mut√°vel
+        	Bitmap mutable = screenBitmap.copy(Bitmap.Config.ARGB_8888, true);
         
-        if (requiresRotation) {
-        	
-            // Rotate the screenshot to the current orientation
-            Bitmap bitmap = Bitmap.createBitmap(metrics.widthPixels / downScale, metrics.heightPixels / downScale, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap);
-            canvas.translate(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
-            canvas.rotate(360f - degrees);
-            canvas.translate(-dims[0] / 2, -dims[1] / 2);
-            canvas.drawBitmap(screenBitmap, 0, 0, null);
-            canvas.setBitmap(null);
-            screenBitmap = bitmap;
-            
-        }
+        	// optimiza√ß√µes
+        	mutable.setHasAlpha(false);
+        	mutable.prepareToDraw();
         
-        // mut·vel
-        Bitmap mutable = screenBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        	// retorna
+        	return mutable;
         
-        // Optimizations
-        mutable.setHasAlpha(false);
-        mutable.prepareToDraw();
-        
-        // retorna
-        return mutable;
-        
-    }
+    	}
 	
 	private static float getDegreesForRotation(int value) {
 		
-        switch (value) {
+	        switch (value) {
+	        
+		        case Surface.ROTATION_90:
+		            return 90f;
+		            
+		        case Surface.ROTATION_180:
+		            return 180f;
+		            
+		        case Surface.ROTATION_270:
+		            return 270f;
+		            
+	        }
+	        
+	        return 0f;
         
-	        case Surface.ROTATION_90:
-	            return 90f;
-	            
-	        case Surface.ROTATION_180:
-	            return 180f;
-	            
-	        case Surface.ROTATION_270:
-	            return 270f;
-	            
-        }
-        
-        return 0f;
-        
-    }
+    	}
 }
