@@ -31,7 +31,7 @@ public class SystemUI_StatusBarHeaderView {
 					// transparente ?
 					handleStatusBarHeaderViewBackround();
 					
-		        }
+		        	}
 			});
 			
 		} catch (Exception e) {
@@ -59,7 +59,7 @@ public class SystemUI_StatusBarHeaderView {
 		if (SystemUI_NotificationPanelView.mNotificationPanelView == null)
 			return;
 		
-		// obtém os campos
+		// obtÃ©m os campos
 		boolean mKeyguardShowing = XposedHelpers.getBooleanField(SystemUI_NotificationPanelView.mNotificationPanelView, "mKeyguardShowing");
 		
 		// continua ?
