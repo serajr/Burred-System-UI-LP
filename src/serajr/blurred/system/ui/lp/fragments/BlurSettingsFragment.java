@@ -260,7 +260,7 @@ public class BlurSettingsFragment extends PreferenceFragment implements OnShared
 			
 		}
 		
-		// envia um intent para atualizar as preferências
+		// envia um intent para atualizar todas as preferências
 		Intent intent = new Intent(BLURRED_SYSTEM_UI_UPDATE_INTENT);
 		getActivity().sendBroadcast(intent);
 		
