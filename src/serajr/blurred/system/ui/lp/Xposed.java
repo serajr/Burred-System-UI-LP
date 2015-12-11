@@ -70,14 +70,14 @@ public class Xposed implements IXposedHookZygoteInit, IXposedHookInitPackageReso
 		mInitPackageResourcesParam = resparam;
     		mXModuleResources = XModuleResources.createInstance(mModulePath, resparam.res);
     	
-    		if (resparam.packageName.equals(SYSTEM_UI_PACKAGE_NAME)) {
-    		
-//    		// recarregam as preferências
-//    		mXSharedPreferences.reload();
+//    		if (resparam.packageName.equals(SYSTEM_UI_PACKAGE_NAME)) {
 //    		
-//    		// hooks
-
-    		}
+//    			// recarregam as preferências
+//    			mXSharedPreferences.reload();
+//    		
+//    			// hooks
+//
+//    		}
     	}
     
     	private void setParentClassLoaders(LoadPackageParam lpparam) throws Throwable {
