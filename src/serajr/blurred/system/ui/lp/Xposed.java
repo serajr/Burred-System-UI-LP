@@ -33,7 +33,7 @@ public class Xposed implements IXposedHookZygoteInit, IXposedHookInitPackageReso
 		mModulePath = startupParam.modulePath;
 		mXSharedPreferences = new XSharedPreferences(MODULE_PACKAGE_NAME);
 		
-//		// recarregam as preferências
+//		// recarregam as preferÃªncias
 //		mXSharedPreferences.reload();
 //		
 //		// hooks
@@ -41,58 +41,57 @@ public class Xposed implements IXposedHookZygoteInit, IXposedHookInitPackageReso
 	}
 	
 	@Override
-    public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
+	public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
     	
-    	mClassLoader = lpparam.classLoader;
+    		mClassLoader = lpparam.classLoader;
     	
-    	if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE_NAME)) {
+    		if (lpparam.packageName.equals(SYSTEM_UI_PACKAGE_NAME)) {
     		
-    		// setam os class loaderes parentes
-    		setParentClassLoaders(lpparam);
+    			// setam os class loaderes parentes
+    			setParentClassLoaders(lpparam);
     	
-    		// recarregam as preferências
-    		mXSharedPreferences.reload();
+    			// recarregam as preferÃªncias
+    			mXSharedPreferences.reload();
     		
 			// hooks
-    		SystemUI_PhoneStatusBar.hook();
-    		SystemUI_BaseStatusBar.hook();
-    		SystemUI_NotificationPanelView.hook();
-    		SystemUI_RecentsActivity.hook();
-    		SystemUI_NotificationBackgroundView.hook();
-    		SystemUI_StatusBarHeaderView.hook();
+	    		SystemUI_PhoneStatusBar.hook();
+	    		SystemUI_BaseStatusBar.hook();
+	    		SystemUI_NotificationPanelView.hook();
+	    		SystemUI_RecentsActivity.hook();
+	    		SystemUI_NotificationBackgroundView.hook();
+	    		SystemUI_StatusBarHeaderView.hook();
     		   			
+    		}
     	}
-    }
     
-    @Override
+    	@Override
 	public void handleInitPackageResources(InitPackageResourcesParam resparam) throws Throwable {
     	
 		mInitPackageResourcesParam = resparam;
-    	mXModuleResources = XModuleResources.createInstance(mModulePath, resparam.res);
+    		mXModuleResources = XModuleResources.createInstance(mModulePath, resparam.res);
     	
-    	if (resparam.packageName.equals(SYSTEM_UI_PACKAGE_NAME)) {
+    		if (resparam.packageName.equals(SYSTEM_UI_PACKAGE_NAME)) {
     		
-//    		// recarregam as preferências
+//    		// recarregam as preferÃªncias
 //    		mXSharedPreferences.reload();
 //    		
 //    		// hooks
 
+    		}
+    	}
+    
+    	private void setParentClassLoaders(LoadPackageParam lpparam) throws Throwable {
+    	
+    		// todos os classloaders
+    		ClassLoader packge = lpparam.classLoader;
+    		ClassLoader module = getClass().getClassLoader();
+    		ClassLoader xposed = module.getParent();
+    	
+    		// package classloader parente Ã©: xposed classloader 
+    		XposedHelpers.setObjectField(packge, "parent", xposed);
+    	
+    		// mÃ³dulo parente classcloader Ã©: package classloader
+    		XposedHelpers.setObjectField(module, "parent", packge);
     	
     	}
-    }
-    
-    private void setParentClassLoaders(LoadPackageParam lpparam) throws Throwable {
-    	
-    	// todos os classloaders
-    	ClassLoader packge = lpparam.classLoader;
-    	ClassLoader module = getClass().getClassLoader();
-    	ClassLoader xposed = module.getParent();
-    	
-    	// package classloader parente é: xposed classloader 
-    	XposedHelpers.setObjectField(packge, "parent", xposed);
-    	
-    	// módulo parente classcloader é: package classloader
-    	XposedHelpers.setObjectField(module, "parent", packge);
-    	
-    }
 }
