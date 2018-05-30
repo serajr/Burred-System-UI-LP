@@ -5,7 +5,7 @@
     "link": "https://github.com/topjohnwu/MagiskManager/releases/download/v5.7.0/MagiskManager-v5.7.0.apk"
   },
   "magisk": {
-    "version": "Drm-Fix Beta Version v16.4",
+    "version": "16.4 Drm-Fix",
     "versionCode": "1642",
     "link": "https://github.com/serajr/Burred-System-UI-LP/blob/master/Magisk-v16.4-Drm-Fix.zip"
   }
